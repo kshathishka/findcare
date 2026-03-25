@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "name": "app.jwt.secret",
+      "type": "java.lang.String",
+      "description": "JWT signing secret used by the backend token provider."
+    },
+    {
+      "name": "app.jwt.expiration",
+      "type": "java.lang.Long",
+      "description": "JWT expiration duration in milliseconds."
+    },
+    {
+      "name": "app.cors.allowed-origins",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of CORS allowed origins."
+    },
+    {
+      "name": "app.auth.rate-limit.max-attempts",
+      "type": "java.lang.Integer",
+      "description": "Maximum failed login attempts allowed in the rate limit window."
+    },
+    {
+      "name": "app.auth.rate-limit.window-seconds",
+      "type": "java.lang.Integer",
+      "description": "Rate limiter rolling window size in seconds."
+    },
+    {
+      "name": "spring.h2.console.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable the H2 database web console in development profile."
+    },
+    {
+      "name": "spring.h2.console.path",
+      "type": "java.lang.String",
+      "description": "Servlet path for the H2 web console."
+    }
+  ]
+}

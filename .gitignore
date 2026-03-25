@@ -1,0 +1,12 @@
+node_modules
+
+# Build artifacts
+backend/target/
+frontend/dist/
+
+# Logs and local env files
+*.log
+.env
+
+# IDE
+.idea/

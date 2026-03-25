@@ -1,0 +1,196 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.25rem",
+        lg: "1.5rem",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1200px",
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        primary: {
+          DEFAULT: "#0EA5E9",
+          50: "#f0f9ff",
+          100: "#e0f2fe",
+          200: "#bae6fd",
+          300: "#7dd3fc",
+          400: "#38bdf8",
+          500: "#0ea5e9",
+          600: "#0284c7",
+          700: "#0369a1",
+          800: "#075985",
+          900: "#0c4a6e",
+          950: "#082f49",
+        },
+        slate: {
+          25: "#fcfdff",
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+        },
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        success: {
+          DEFAULT: "#10b981",
+          50: "#ecfdf5",
+          100: "#d1fae5",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857",
+        },
+        warning: {
+          DEFAULT: "#f59e0b",
+          50: "#fffbeb",
+          100: "#fef3c7",
+          500: "#f59e0b",
+          600: "#d97706",
+        },
+      },
+      borderRadius: {
+        lg: "0.75rem",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+        xl: "0.75rem",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+      },
+      fontSize: {
+        h1: ["clamp(2rem, 4vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        h2: ["clamp(1.625rem, 3vw, 2.5rem)", { lineHeight: "1.15", letterSpacing: "-0.018em", fontWeight: "700" }],
+        h3: ["clamp(1.25rem, 2vw, 1.75rem)", { lineHeight: "1.2", letterSpacing: "-0.014em", fontWeight: "600" }],
+        subtitle: ["1.125rem", { lineHeight: "1.6", fontWeight: "500" }],
+        body: ["1rem", { lineHeight: "1.6", fontWeight: "400" }],
+        caption: ["0.8125rem", { lineHeight: "1.45", fontWeight: "500" }],
+        "2xs": ["0.625rem", { lineHeight: "0.875rem" }],
+      },
+      spacing: {
+        grid: "0.25rem",
+        1.5: "0.375rem",
+        2.5: "0.625rem",
+        3.5: "0.875rem",
+        "4.5": "1.125rem",
+        7: "1.75rem",
+        14: "3.5rem",
+        "18": "4.5rem",
+      },
+      boxShadow: {
+        soft: "0 4px 14px -6px rgba(15, 23, 42, 0.12)",
+        card: "0 1px 2px rgba(15, 23, 42, 0.08), 0 8px 20px -14px rgba(15, 23, 42, 0.18)",
+        "card-hover": "0 10px 30px -14px rgba(15, 23, 42, 0.24), 0 8px 18px -16px rgba(2, 132, 199, 0.35)",
+        nav: "0 8px 28px -18px rgba(15, 23, 42, 0.32)",
+        elevated: "0 20px 44px -28px rgba(15, 23, 42, 0.38)",
+      },
+      backgroundImage: {
+        "hero-glow": "radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.24), transparent 40%), radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.14), transparent 36%), linear-gradient(180deg, #f8fafc 0%, #ffffff 62%)",
+      },
+      keyframes: {
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-in-right": {
+          from: { opacity: "0", transform: "translateX(16px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        "pulse-soft": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.6" },
+        },
+        "toast-in": {
+          from: { opacity: "0", transform: "translateX(100%)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        "toast-out": {
+          from: { opacity: "1", transform: "translateX(0)" },
+          to: { opacity: "0", transform: "translateX(100%)" },
+        },
+        "count-up": {
+          from: { opacity: "0", transform: "translateY(4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "pulse-ring": {
+          "0%": { transform: "scale(0.9)", opacity: "0.75" },
+          "70%": { transform: "scale(1.2)", opacity: "0" },
+          "100%": { transform: "scale(1.2)", opacity: "0" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.4s ease-out forwards",
+        "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+        "slide-in-right": "slide-in-right 0.4s ease-out forwards",
+        "scale-in": "scale-in 0.3s ease-out forwards",
+        "shimmer": "shimmer 2s infinite linear",
+        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
+        "toast-in": "toast-in 0.3s ease-out forwards",
+        "toast-out": "toast-out 0.3s ease-in forwards",
+        "count-up": "count-up 0.3s ease-out forwards",
+        "pulse-ring": "pulse-ring 2s cubic-bezier(0, 0, 0.2, 1) infinite",
+      },
+      transitionTimingFunction: {
+        smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
+    },
+  },
+  plugins: [],
+}

@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 99%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 20% 20%;
+
+    --muted: 210 18% 95%;
+    --muted-foreground: 215 14% 46%;
+
+    --accent: 199 89% 96%;
+    --accent-foreground: 199 89% 30%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 92%;
+    --input: 214 20% 89%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-semibold text-foreground;
+  }
+}
+
+@layer components {
+  /* Skeleton loader */
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-muted;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--background) / 0.6) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  /* Badge variants */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors;
+  }
+  .badge-primary {
+    @apply bg-primary-100 text-primary-700;
+  }
+  .badge-success {
+    @apply bg-success-50 text-success-700;
+  }
+  .badge-warning {
+    @apply bg-warning-50 text-warning-600;
+  }
+  .badge-destructive {
+    @apply bg-red-50 text-red-700;
+  }
+  .badge-secondary {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-3.5 py-2.5 rounded-lg border border-input bg-background text-sm
+           placeholder:text-muted-foreground
+           focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-primary
+           transition-all duration-200;
+  }
+  .input-error {
+    @apply border-red-400 focus:ring-red-200 focus:border-red-500;
+  }
+
+  /* Button hierarchy */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-lg
+           transition-all duration-200 ease-out
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
+           active:scale-[0.98];
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .btn-md {
+    @apply px-4 py-2.5 text-sm;
+  }
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  .btn-primary {
+    @apply bg-primary-500 text-white shadow-sm
+           hover:bg-primary-600 hover:shadow-md
+           focus:ring-primary-300;
+  }
+  .btn-secondary {
+    @apply border border-border bg-white text-foreground shadow-sm
+           hover:bg-muted hover:border-primary/30
+           focus:ring-primary-200;
+  }
+  .btn-ghost {
+    @apply text-muted-foreground
+           hover:bg-muted hover:text-foreground
+           focus:ring-primary-200;
+  }
+  .btn-destructive {
+    @apply bg-red-500 text-white shadow-sm
+           hover:bg-red-600
+           focus:ring-red-300;
+  }
+  .btn-success {
+    @apply bg-success-500 text-white shadow-sm
+           hover:bg-success-600
+           focus:ring-success-100;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-card border border-border rounded-xl shadow-card overflow-hidden
+           transition-all duration-300;
+  }
+  .card-hover {
+    @apply hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+  .card-body {
+    @apply p-5 sm:p-6;
+  }
+
+  /* Status badges */
+  .status-pending {
+    @apply bg-amber-50 text-amber-700 border border-amber-200;
+  }
+  .status-confirmed {
+    @apply bg-blue-50 text-blue-700 border border-blue-200;
+  }
+  .status-completed {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
+  }
+  .status-cancelled {
+    @apply bg-slate-100 text-slate-500 border border-slate-200;
+  }
+
+  /* Page wrapper */
+  .page-wrapper {
+    @apply container mx-auto px-4 py-6 sm:py-8 pb-10 sm:pb-12;
+  }
+  .page-title {
+    @apply text-2xl sm:text-3xl font-bold tracking-tight;
+  }
+  .page-subtitle {
+    @apply text-muted-foreground mt-1;
+  }
+
+  /* Section label */
+  .section-title {
+    @apply text-lg sm:text-xl font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-primary-700;
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+}
