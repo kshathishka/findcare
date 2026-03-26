@@ -61,12 +61,25 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                // Public authentication endpoints
                 .requestMatchers(HttpMethod.POST, "/api/auth/signup", "/api/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+                
+                // Public read endpoints - no authentication required
                 .requestMatchers(HttpMethod.GET,
+                        "/api/hospitals",
                         "/api/hospitals/**",
+                        "/api/doctors",
                         "/api/doctors/**",
+                        "/api/departments",
                         "/api/departments/**",
-                        "/api/timeslots/doctor/**").permitAll()
+                        "/api/timeslots",
+                        "/api/timeslots/**").permitAll()
+                
+                // Health check endpoint
+                .requestMatchers("/health", "/actuator/health").permitAll()
+                
+                // All other requests require authentication
                 .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())
@@ -79,15 +92,43 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        
+        // Parse allowed origins from application.properties
+        // Supports multiple origins separated by commas
+        // Example: http://localhost:5173,https://myapp.example.com
         List<String> origins = Arrays.stream(allowedOrigins.split(","))
             .map(String::trim)
             .filter(origin -> !origin.isEmpty())
             .toList();
+        
         configuration.setAllowedOrigins(origins);
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Request-ID"));
-        configuration.setExposedHeaders(Arrays.asList("X-Request-ID"));
+        
+        // Allow all standard HTTP methods
+        configuration.setAllowedMethods(Arrays.asList(
+                "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"
+        ));
+        
+        // Allow common headers for requests
+        configuration.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "X-Requested-With",
+                "X-Request-ID",
+                "Accept",
+                "Origin"
+        ));
+        
+        // Expose headers that client can read
+        configuration.setExposedHeaders(Arrays.asList(
+                "X-Request-ID",
+                "Authorization",
+                "Content-Disposition"
+        ));
+        
+        // Allow credentials (cookies, auth headers)
         configuration.setAllowCredentials(true);
+        
+        // Cache preflight response for 1 hour
         configuration.setMaxAge(3600L);
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
